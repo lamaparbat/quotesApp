@@ -33,6 +33,11 @@
     letter-spacing: 1;
    }
 
+   .card #navbar {
+    display: flex;
+    justify-content: space-between;
+   }
+
    .card #navbar button {
     padding: 5px;
     width: 200px;
@@ -48,16 +53,11 @@
     position: relative;
    }
 
-   #navbar {
-    display: flex;
-    justify-content: space-between;
-   }
-
-   #twit {
+   .card #navbar #twit {
     cursor: pointer;
    }
 
-   #twit:hover {
+   .card #navbar #twit:hover {
     opacity: 0.6;
    }
   </style>
@@ -77,7 +77,8 @@
   <script>
    // initialize the quotes variable with null value
    var quotes = null
-
+   
+   // fetching the data by following promise rules
    fetch("https://geek-jokes.sameerkumar.website/api")
     .then((response, reject) => {
      return response.json()
@@ -94,7 +95,7 @@
     document.getElementById("btn").style.backgroundColor = "#" + val
    }
 
-   //next quotes
+   //next quotes || refresh the page
    const next = () => {
     location.assign("")
    }
