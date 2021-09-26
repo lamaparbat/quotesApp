@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quotes App</title>
+  <style>
+   * {
+    margin: 0;
+    padding: 0;
+   }
+
+   .container {
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(97, 190, 252);
+    display: grid;
+    place-items: center;
+   }
+
+   .card {
+    padding: 20px;
+    height: fit-content;
+    width: 300px;
+    background-color: aqua;
+    border-radius: 5px;
+   }
+
+   .card h3 {
+    font-family: sans-serif;
+    letter-spacing: 1;
+   }
+
+   .card #navbar button {
+    padding: 5px;
+    width: 200px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    filter: invert();
+   }
+
+   .card #navbar img {
+    border-radius: 50px;
+    position: relative;
+   }
+
+   #navbar {
+    display: flex;
+    justify-content: space-between;
+   }
+
+   #twit {
+    cursor: pointer;
+   }
+
+   #twit:hover {
+    opacity: 0.6;
+   }
+  </style>
+ </head>
+
+ <body>
+  <div class="container">
+   <div class="card">
+    <h2 id="quotes"></h2><br /><br />
+    <div id="navbar">
+     <button id="btn" onclick="next()">Next Quotes</button>
+     <img src="https://image.similarpng.com/very-thumbnail/2020/06/Black-icon-Twitter-logo-transparent-PNG.png"
+      height="40" width="40" id="twit" onclick="twit()" />
+    </div>
+   </div>
+  </div>
+  <script>
+   // initialize the quotes variable with null value
+   var quotes = null
+
+   fetch("https://geek-jokes.sameerkumar.website/api")
+    .then((response, reject) => {
+     return response.json()
+    }).then(data => {
+     document.getElementById("quotes").innerText = data
+     quotes = data
+     randomizeColor()
+    })
+
+   //randomize the background color
+   const randomizeColor = () => {
+    val = Math.floor(Math.random() * 16777215).toString(16)
+    document.querySelector(".container").style.backgroundColor = "#" + val
+    document.getElementById("btn").style.backgroundColor = "#" + val
+   }
+
+   //next quotes
+   const next = () => {
+    location.assign("")
+   }
+
+   // twit the quotes
+   const twit = () => {
+     // web intent url -> url of twitter embedded a current quotes 
+     let twitPost = `https://twitter.com/intent/tweet?text=${quotes}`
+     //redirect to twitter
+     window.open(twitPost)
+   }
+  </script>
+ </body>
+
+</html>
